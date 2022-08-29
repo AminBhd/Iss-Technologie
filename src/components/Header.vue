@@ -1,73 +1,92 @@
 <template>
-  <div id="header">
 
-    <div class="logo">
-      <img :src="require(`../assets/${logoSrc}`)" alt="">
-    </div>
-    <div class="nav-list" :class="{onScroll: topOfPage }" >
-      <ul>
-        <li v-for="(list, index) in navList" :key="index">{{ list }}</li>
-      </ul>
-    </div>
-  </div>
+    <nav class="navbar navbar-expand-sm sticky-top py-4" id="header">
+      <div class="container">
+        <div class="logo">
+          <img :src="require(`../assets/${logoSrc}`)" alt="" />
+        </div>
+        <button
+          class="navbar-toggler navbar-toggler-right"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbar1"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse nav-list" id="navbar1">
+          <ul class="navbar-nav">
+            <li
+
+              class="nav-item"
+              v-for="(list, index) in navList"
+              :key="index"
+            >
+              <a href="#" :class="{active: navList[`${index}`]}" >{{ index }}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 </template>
 
 <script>
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap";
+
 export default {
-  name: 'Header',
-  props: {
-  },
+  name: "Header",
+
   data() {
     return {
-      logoSrc: 'logo.png',
-      navList: ['Home', 'About', 'Services', 'Contact'],
-      topOfPage: window.scrollY,
-      pageY: false,
-    }
+      logoSrc: "logo.png",
+      navList: {
+        "Home": true,
+        "About": false,
+        "Services": false,
+        "Contact": false},
+      headerPos: null,
+    };
+  },
+
+  created() {
+    window.addEventListener("scroll", this.handleScroll);
   },
 
   mounted() {
-      console.log(this.topOfPage)
-    
+    this.headerPos = this.$el;
+
+  },
+  unmounted() {
+    window.removeEventListener("scroll", this.handleScroll);
   },
 
   methods: {
-    onTopOfPage: () => {
-      console.log(this.topOfPage)
-    }
-  },
-
-  watch: {
-    topOfPage(x) {
-      console.log(x);
+    handleScroll() {
+      // console.log(this.headerPos.getBoundingClientRect().top);
+      if (this.headerPos.getBoundingClientRect().top == 0) {
+        document.documentElement.setAttribute("class", "stuck");
+      } else document.documentElement.removeAttribute("class");
     },
-    // pageY: function(y) {
-    //   this.pageY = y;
-    // }
-  }
-}
+  },
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
+
+
+
 <style scoped>
 #header{
-  height: 65px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2px;
-  background: linear-gradient(-90deg, #121212, #676767);
-  z-index: 100;
-  position: fixed;
+  background-color: #121212;
 }
 
-img{
+img {
   width: 64px;
   height: 60px;
   margin-left: 2.5rem;
 }
 
-.nav-list{
+.nav-list {
   position: absolute;
   left: 35%;
   color: #fff;
@@ -77,28 +96,78 @@ img{
 
 onScroll {
   height: 75px;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.57);
   /* transition: all ease 0.5s; */
-
 }
 
 ul {
   list-style-type: none;
   padding: 0;
 }
+
 li {
   display: inline-block;
-  margin: 0 20px;
+  position: relative;
+  padding: 0 20px;
 }
-a{
+
+a {
   text-decoration: none;
-  color: #000;
+  color: #fff;
+  transition: all ease .5s;
 }
 
-@media (max-width: 400px) {
-  .nav-list {
-    display: none;
-  }
+a:hover {
+  color: #3DA0E3 !important;
+  transition: all ease .5s;
 }
 
+a:hover::after {
+  position: absolute;
+  content: '';
+  width: 0;
+  height: 2px;
+  background-color: #3DA0E3;
+  bottom: -4px;
+  z-index: 99;
+  left: 20px;
+}
+
+a.active::after {
+  position: absolute;
+  content: '';
+  width: 70%;
+  height: 2px;
+  background-color: #3DA0E3;
+  bottom: -4px;
+  z-index: 99;
+  left: 20px;
+}
+
+a:hover::after {
+  position: absolute;
+  content: '';
+  width: 30%;
+  height: 2px;
+  background-color: #3DA0E3;
+  bottom: -4px;
+  z-index: 99;
+  left: 20px;
+  transition: width ease 1s;
+}
+
+.active {
+  color: #3DA0E3 !important;
+}
+
+.sticky-top {
+    transition: all 0.25s ease-in;
+}
+
+/* style for when sitcky is applied */
+.stuck .navbar.sticky-top {
+    background: linear-gradient(90deg,#888888, #121212,#121212) !important;
+    padding-top: .8rem !important;
+    padding-bottom: .8rem !important;
+    box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.57);
+}
 </style>
