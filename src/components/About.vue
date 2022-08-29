@@ -4,20 +4,25 @@
       <img src="../assets/about-cover.jpg" alt="" />
       <div class="background"></div>
     </div>
+
     <div class="about-container">
       <div class="logo-container">
         <img class="logo" src="../assets/logo.png" alt="" />
       </div>
       <div class="know-us">
-        <h1>#Know Us</h1>
+        <h1>#know Us</h1>
       </div>
     </div>
+
     <div class="about-description">
+      <h1>Vente, Étude et Installation</h1>
       <p>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum
-        blanditiis aperiam nesciunt quisquam obcaecati sequi, reiciendis,
-        eaque eos deleniti facere nobis iure quas soluta ex mollitia facilis
-        minus ipsam sunt!
+        blanditiis aperiam nesciunt quisquam obcaecati sequi, reiciendis, eaque
+        eos deleniti facere nobis iure quas soluta ex mollitia facilis minus
+        ipsam sunt! Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Quos nobis eveniet nemo magni tenetur. Ex a dolorum officiis minus earum
+        est iusto ipsam quas, nostrum ducimus veniam, unde, voluptate vero!
       </p>
     </div>
 
@@ -40,13 +45,10 @@
 
 
 <script>
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 
-export default {
-
-};
+export default {};
 </script>
 
 
@@ -93,10 +95,10 @@ export default {
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-evenly;
-  position: absolute;
   width: 100%;
   height: auto;
   align-items: center;
+  position: relative;
 }
 
 .know-us {
@@ -105,32 +107,37 @@ export default {
   color: #ffffff;
   text-align: center;
   margin-top: 5vw;
-
 }
 
 .know-us h1 {
-  font-size: 6vw;
+  font-size: 5.5em;
   font-weight: 500;
 }
 
 .logo-container {
-    width: 400px;
-    display: flex;
-    margin-top: 2vw;
+  width: 400px;
+  display: flex;
 }
 
 .logo {
-    width: 70%;
+  width: 70%;
   height: auto;
   margin: auto;
 }
 
 .about-description {
   width: 80%;
-  height: 30%;
-  padding-top: 35%;
-  box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.57);
+  height: auto;
+  max-width: 950px;
+  margin-top: 6vh;
+  margin-left: auto;
+  margin-right: auto;
+  color: #ffffff;
 }
+
+/* .about-description h1{
+  font-size: 4.5vmin	;
+} */
 
 .bottom-line {
   position: absolute;
@@ -139,6 +146,7 @@ export default {
   width: 100%;
   overflow: hidden;
   line-height: 0;
+  margin-bottom: -1px;
 }
 
 .bottom-line svg {
@@ -149,6 +157,13 @@ export default {
 }
 
 .bottom-line .shape-fill {
-  fill: #ffffff;
+  fill: #3DA0E3;
 }
+
+@media (max-width: 800px) {
+  .know-us h1 {
+    font-size: 3em;
+  }
+}
+
 </style>

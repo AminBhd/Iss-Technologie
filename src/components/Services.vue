@@ -17,7 +17,7 @@ export default {
 #services {
     width: 100%;
     height: 100vh;
-    background: #fff;
+    background: #3DA0E3;
 }
 
 </style>
